@@ -4,25 +4,39 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     width: 100%;
-    height: 100%;
-    background: #f1e8cf;
+    min-height: 100%;
+    background-color: #f1e8cf !important;
     overflow-x: hidden;
+
+    /* Safari Fix */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
 }
 
+body {
+    background-color: #f1e8cf !important;
+}
+
+/* =========================
+   INTRO SCREEN
+========================= */
 .intro-screen {
     position: fixed;
     inset: 0;
+    width: 100%;
+    height: 100%;
 
-   background: #f1e8cf;
+    background-color: #f1e8cf !important;
+
     z-index: 9999;
-
     overflow: hidden;
 }
 
 /* =========================
-   VIDEO FIX (IOS + ANDROID SAFE)
+   VIDEO FIX (IOS + ANDROID)
 ========================= */
 .intro-video {
     position: absolute;
@@ -31,31 +45,32 @@ html, body {
     width: 100%;
     height: 100%;
 
+    display: block;
     object-fit: cover;
 
-    display: block;
+    background-color: #f1e8cf;
 
     z-index: 1;
 
-    /* 🔥 أهم تعديل */
-   
- background: #f1e8cf;
-    /* تحسين iOS rendering */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+    -webkit-transform: translateZ(0) scale(1.25);
+    transform: translateZ(0) scale(1.25);
 
     will-change: transform;
-
-    /* بدل scale الكبير (بيكسر iPhone أحيانًا) */
-    transform: scale(1.25);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
+
 /* =========================
    MAIN
 ========================= */
 .main {
     display: none;
+
     opacity: 0;
     visibility: hidden;
+
+    background-color: #f1e8cf;
+
     transition: opacity 0.8s ease;
 }
 
@@ -69,10 +84,8 @@ html, body {
 ========================= */
 .music-player {
     position: fixed;
-
     bottom: 25px;
     left: 25px;
-
     z-index: 99999;
 }
 
@@ -82,7 +95,6 @@ html, body {
 
     border: none;
     outline: none;
-
     border-radius: 50%;
 
     cursor: pointer;
@@ -98,6 +110,7 @@ html, body {
     );
 
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
     border: 1px solid rgba(255,255,255,.15);
 
@@ -112,7 +125,9 @@ html, body {
     transform: translateY(-4px) scale(1.06);
 }
 
-/* disc */
+/* =========================
+   DISC
+========================= */
 .music-disc {
     width: 52px;
     height: 52px;
@@ -126,20 +141,25 @@ html, body {
     background: radial-gradient(circle, #f5ed96, #dda41d);
 
     color: #fff;
-
     font-size: 20px;
 
     box-shadow: 0 0 22px rgba(255,80,120,.45);
 }
 
-/* spinning */
+/* =========================
+   SPINNING
+========================= */
 #musicBtn.playing .music-disc {
     animation: discSpin 4s linear infinite;
 }
 
 @keyframes discSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* =========================
@@ -161,5 +181,10 @@ html, body {
         width: 46px;
         height: 46px;
         font-size: 17px;
+    }
+
+    .intro-video {
+        transform: translateZ(0) scale(1.15);
+        -webkit-transform: translateZ(0) scale(1.15);
     }
 }
