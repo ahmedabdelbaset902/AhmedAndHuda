@@ -1,3 +1,4 @@
+
 const weddingDate = new Date("2026-06-18T00:00:00").getTime();
 
 const daysEl = document.getElementById("days");
@@ -24,15 +25,15 @@ function updateCountdown() {
         return;
     }
 
-    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const d = Math.ceil(distance / (1000 * 60 * 60 * 24));
     const h = Math.floor((distance / (1000 * 60 * 60)) % 24);
     const m = Math.floor((distance / (1000 * 60)) % 60);
     const s = Math.floor((distance / 1000) % 60);
 
-    daysEl.innerHTML = String(d).padStart(2, "0");
-    hoursEl.innerHTML = String(h).padStart(2, "0");
-    minutesEl.innerHTML = String(m).padStart(2, "0");
-    secondsEl.innerHTML = String(s).padStart(2, "0");
+    updateFlip(daysEl, String(d).padStart(2, "0"));
+    updateFlip(hoursEl, String(h).padStart(2, "0"));
+    updateFlip(minutesEl, String(m).padStart(2, "0"));
+    updateFlip(secondsEl, String(s).padStart(2, "0"));
 }
 
 updateCountdown();
@@ -57,3 +58,4 @@ function updateFlip(el, newValue) {
 
     }, 350);
 }
+
